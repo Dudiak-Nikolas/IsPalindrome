@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Palindrome_text
 {
-    class Solution 
+    class Solution
     {
         public static bool IsPalindrome(string x)
         {
@@ -19,25 +19,25 @@ namespace Palindrome_text
         }
         static void Main(string[] args)
         {
-            string vin, Text, Lov, Tow;
-            bool to;
-            
+            string Read, Low, Match, Value;
+            bool Expo;
+
 
             Console.Write("\n Для того чтобы проверить есть ли Текст палиндромным укажите снизу эго:\n");
             Console.Write("---------------------------------------------------------------\n ");
 
             Console.Write(" Укажите Текст : ");
-            vin = Console.ReadLine();
-            Lov = vin.ToLower();
-            Regex myReg = new Regex(@"[a-zA-Z,\s]{5,50}");
-            Tow = Regex.Replace(Lov, @"\d", " ");
-            Match match = myReg.Match(Tow);
+            Read = Console.ReadLine();
+            Low = Read.ToLower();
+            Regex myReg = new Regex(@"^[a-zA-Z0-9,\s]+$");
+            Match = Regex.Replace(Low, @"\d", " ");
+            Match match = myReg.Match(Match);
 
-            Text = match.Value;
-           
-            to = IsPalindrome(Text);
+            Value = match.Value;
 
-            if(to == true)
+            Expo = IsPalindrome(Value);
+
+            if (Expo == true)
             {
                 Console.WriteLine(" Этот текст являются палиндромним.\n");
             }
