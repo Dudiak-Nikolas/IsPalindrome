@@ -13,7 +13,7 @@ namespace Revers
             {
                 int list = x % 10;
                 int NewRev = rev * 10 + list;
-                if((NewRev - list)/10 != rev)
+                if ((NewRev - list) / 10 != rev)
                 {
                     break;
                 }
@@ -24,11 +24,31 @@ namespace Revers
             return rev;
         }
 
-        static void Main(String[] args)
+        static void Main()
         {
-            Console.Write(" Укажите Числа : ");
-            Console.Write("Числа в реверсе : "
-                    + Reverse(Convert.ToInt32(Console.ReadLine())));
+            int a, Export;
+            Console.Write("Укажите сколько нужно виполнить проверок в Реверсе : ");
+            int i = int.Parse(Console.ReadLine());
+
+            for (int j = 1; j <= i; j++)
+            {
+                try
+                {
+                    Console.Write("Укажите Числа : ");
+                    a = unchecked(int.Parse(Console.ReadLine()));
+                    Export = Solution.Reverse(a);
+
+                    checked
+                    {
+                        Console.WriteLine("Числа в реверсе : " + Export + "\n");  
+                    }
+                }
+                catch (OverflowException)
+                {
+                    Console.Write("Переполнение\n\n");
+                }
+            }
+            Console.ReadLine();
         }
     }
 }
