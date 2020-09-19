@@ -7,35 +7,34 @@ namespace Palindrome_text
     {
         public static bool IsPalindrome(string x)
         {
-            if (x.Length <= 1)
+            string Low, Match, Pal;
+
+            Low = x.ToLower();
+            Regex myReg = new Regex(@"^[a-zA-Z0-9]+$");
+            Match = Regex.Replace(Low, @"\d", "");
+            Match match = myReg.Match(Match);
+
+            Pal = match.Value;
+
+            if (Pal.Length <= 1)
                 return true;
             else
             {
-                if (x[0] != x[x.Length - 1])
+                if (Pal[0] != Pal[Pal.Length - 1])
                     return false;
                 else
-                    return IsPalindrome(x.Substring(1, x.Length - 2));
+                    return IsPalindrome(Pal.Substring(1, Pal.Length - 2));
             }
         }
         static void Main(string[] args)
         {
-            string Read, Low, Match, Value;
             bool Expo;
-
 
             Console.Write("\n Для того чтобы проверить есть ли Текст палиндромным укажите снизу эго:\n");
             Console.Write("---------------------------------------------------------------\n ");
 
             Console.Write(" Укажите Текст : ");
-            Read = Console.ReadLine();
-            Low = Read.ToLower();
-            Regex myReg = new Regex(@"^[a-zA-Z0-9,\s]+$");
-            Match = Regex.Replace(Low, @"\d", " ");
-            Match match = myReg.Match(Match);
-
-            Value = match.Value;
-
-            Expo = IsPalindrome(Value);
+            Expo = IsPalindrome(Console.ReadLine());
 
             if (Expo == true)
             {
