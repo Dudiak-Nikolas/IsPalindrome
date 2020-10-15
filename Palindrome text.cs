@@ -1,50 +1,58 @@
 using System;
-using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Palindrome_text
 {
     class Solution
     {
-        public static bool IsPalindrome(string x)
+        public static bool IsFilter(string y)
         {
-            string Low, Match, Pal;
+            if (y != string.Concat(y.Where(x => char.IsLetterOrDigit(x))))
+                return true;
+            else 
+            {
+                var newText = string.Concat(y.ToLower()
+                    .Where((a) => char.IsDigit(a) || (a >= 'a' & a <= 'z'))
+                    .Where(x => !char.IsDigit(x))
+                    .ToArray());
+                var export = IsPalindrome(newText);
+                return export;
+            }
+        }
 
-            Low = x.ToLower();
-            Regex myReg = new Regex(@"^[a-zA-Z0-9]+$");
-            Match = Regex.Replace(Low, @"\d", "");
-            Match match = myReg.Match(Match);
 
-            Pal = match.Value;
 
-            if (Pal.Length <= 1)
+        private static bool IsPalindrome(string x)
+        {
+            if (x.Length <= 1)
                 return true;
             else
             {
-                if (Pal[0] != Pal[Pal.Length - 1])
+                if (x[0] != x[x.Length - 1])
                     return false;
                 else
-                    return IsPalindrome(Pal.Substring(1, Pal.Length - 2));
+                    return IsPalindrome(x.Substring(1, x.Length - 2));
             }
         }
-        static void Main(string[] args)
-        {
-            bool Expo;
-
-            Console.Write("\n Для того чтобы проверить есть ли Текст палиндромным укажите снизу эго:\n");
-            Console.Write("---------------------------------------------------------------\n ");
-
-            Console.Write(" Укажите Текст : ");
-            Expo = IsPalindrome(Console.ReadLine());
-
-            if (Expo == true)
+            static void Main(string[] args)
             {
-                Console.WriteLine(" Этот текст являются палиндромним.\n");
-            }
-            else
-            {
-                Console.WriteLine(" Этот текст не являются палиндромним.\n");
-            }
-            Console.Read();
-        }
+                bool Expo;
+
+                Console.Write("\n Для того чтобы проверить есть ли Текст палиндромным укажите снизу эго:\n");
+                Console.Write("---------------------------------------------------------------\n ");
+
+                Console.Write(" Укажите Текст : ");
+                Expo = IsFilter(Console.ReadLine());
+
+                if (Expo == true)
+                {
+                    Console.WriteLine(" Этот текст являются палиндромним.\n");
+                }
+                else
+                {
+                    Console.WriteLine(" Этот текст не являются палиндромним.\n");
+                }
+                Console.Read();
+         }
     }
 }
